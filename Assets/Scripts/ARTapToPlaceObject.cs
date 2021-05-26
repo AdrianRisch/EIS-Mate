@@ -17,6 +17,10 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
+    private float initialDistance;
+    private float currentDistance;
+    private Vector3 initialScale;
+
     private void Awake()
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
@@ -48,6 +52,35 @@ public class ARTapToPlaceObject : MonoBehaviour
             else
             {
                 spawnedObject.transform.position = hitPose.position;
+                spawnedObject.transform.rotation = hitPose.rotation;
+            }
+            if(Input.touchCount == 2)
+            {
+                var touchZero = Input.GetTouch(0);
+                var touchOne = Input.GetTouch(1);
+
+                //if any one of touchzero or touchone is cancelled or maybe ended do nothing
+                if(touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
+                   touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
+                {
+                    return;
+                }
+                if(touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+                {
+                    initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                    initialScale = spawnedObject.transform.localScale;
+                }
+                else //if touch is moved
+                {
+                    currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                    //if accidentally touched or pinch movement is very very small
+                    if(Mathf.Approximately(initialDistance, 0))
+                    {
+                        return; //do nothing
+                    }
+                    var factor = currentDistance / initialDistance;
+                    spawnedObject.transform.localScale = initialScale * factor;
+                }
             }
         }
     }
