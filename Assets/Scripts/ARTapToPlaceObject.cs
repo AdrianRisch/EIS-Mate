@@ -24,7 +24,6 @@ public class ARTapToPlaceObject : MonoBehaviour
     private void Awake()
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
-
     }
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
