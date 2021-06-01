@@ -13,11 +13,11 @@ public class BoardManager : MonoBehaviour
     public List<GameObject> chesspiecesPrefabs;
     private List<GameObject> activeChesspiece;
 
-    private Quaternion orientation = Quaternion.Euler(0, 180, 0);
+    private Quaternion orientation = Quaternion.Euler(0, 90, 0);
 
     private void Start()
     {
-        
+        SpawnAllChesspieces();
     }
 
     private void Update()
