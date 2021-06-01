@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1201063165695545505}
   - component: {fileID: 1201063165696315521}
   - component: {fileID: 1201063165697446465}
+  - component: {fileID: 1472456829101543529}
   m_Layer: 0
   m_Name: 5 White Knight
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1472456829101543529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201063165695184001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b82eb144f476f4589312f232150cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 1

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
+    public Chessman [,] Chessmans { set; get; }
+    private Chessman selectedChessman;
+
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5f;
 
@@ -15,6 +18,8 @@ public class BoardManager : MonoBehaviour
 
     private Quaternion orientation = Quaternion.Euler(0, 90, 0);
 
+    public bool isWhiteTurn = true;
+
     private void Start()
     {
         SpawnAllChesspieces();
@@ -24,6 +29,48 @@ public class BoardManager : MonoBehaviour
     {
         UpdateSelection();
         DrawChessboard();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (selectionX >= 0 && selectionY >= 0)
+            {
+                if(selectedChessman== null)
+                {
+                    //select the chessman
+                    SelectChessman(selectionX, selectionY);
+                }
+                else
+                {
+                    //move the Chessman
+                    MoveChessman(selectionX, selectionY);
+                }
+            }
+        }
+    }
+
+    private void SelectChessman(int x, int y)
+    {
+        if(Chessmans[x,y]== null)
+            return;
+     
+        if (Chessmans[x, y].isWhite != isWhiteTurn)
+            return;
+
+        selectedChessman = Chessmans[x, y];
+        
+    }
+
+    private void MoveChessman(int x, int y)
+    {
+        if (selectedChessman.PossibleMove(x, y))
+        {
+            Chessmans [selectedChessman.CurrentX, selectedChessman.CurrentY] = null;
+            selectedChessman.transform.position = GetTileCenter(x, y);
+            Chessmans[x, y] = selectedChessman;
+            isWhiteTurn = !isWhiteTurn;
+        }
+
+        selectedChessman = null;
     }
     private void UpdateSelection()
     {
@@ -42,52 +89,55 @@ public class BoardManager : MonoBehaviour
             selectionY = -1;
         }
     }
-    private void SpawnChesspiece(int index, Vector3 position)
+    private void SpawnChesspiece(int index, int x, int y )
     {
-        GameObject go = Instantiate(chesspiecesPrefabs[index], position, orientation) as GameObject;
+        GameObject go = Instantiate(chesspiecesPrefabs[index], GetTileCenter(x,y), orientation) as GameObject;
         go.transform.SetParent(transform);
+        Chessmans[x, y] = go.GetComponent<Chessman>();
+        Chessmans[x, y].SetPosition(x, y);
         activeChesspiece.Add(go);
     }
     private void SpawnAllChesspieces()
     {
         activeChesspiece = new List<GameObject>();
+        Chessmans = new Chessman[8, 8];
         //Spawn White 
         //King
-        SpawnChesspiece(0, GetTileCenter(3, 0));
+        SpawnChesspiece(0, 3, 0);
         //Queen
-        SpawnChesspiece(1, GetTileCenter(4, 0));
+        SpawnChesspiece(1, 4, 0);
         //Rooks
-        SpawnChesspiece(2, GetTileCenter(0, 0));
-        SpawnChesspiece(2, GetTileCenter(7, 0));
+        SpawnChesspiece(2, 0, 0);
+        SpawnChesspiece(2, 7, 0);
         //Bishops
-        SpawnChesspiece(3, GetTileCenter(2, 0));
-        SpawnChesspiece(3, GetTileCenter(5, 0));
+        SpawnChesspiece(3, 2, 0);
+        SpawnChesspiece(3, 5, 0);
         //Knights
-        SpawnChesspiece(4, GetTileCenter(1, 0)); 
-        SpawnChesspiece(4, GetTileCenter(6, 0));
+        SpawnChesspiece(4, 1, 0); 
+        SpawnChesspiece(4, 6, 0);
         //Pawns
         for (int i = 0; i < 8; i++)
         {
-            SpawnChesspiece(5, GetTileCenter(i, 1));
+            SpawnChesspiece(5, i, 1);
         }
         //Spawn Black
         //King
-        SpawnChesspiece(6, GetTileCenter(3, 7));
+        SpawnChesspiece(6, 3, 7);
         //Queen
-        SpawnChesspiece(7, GetTileCenter(4, 7));
+        SpawnChesspiece(7, 4, 7);
         //Rooks
-        SpawnChesspiece(8, GetTileCenter(0, 7));
-        SpawnChesspiece(8, GetTileCenter(7, 7));
+        SpawnChesspiece(8, 0, 7);
+        SpawnChesspiece(8, 7, 7);
         //Bishops
-        SpawnChesspiece(9, GetTileCenter(2, 7));
-        SpawnChesspiece(9, GetTileCenter(5, 7));
+        SpawnChesspiece(9, 2, 7);
+        SpawnChesspiece(9, 5, 7);
         //Knights
-        SpawnChesspiece(10, GetTileCenter(1, 7));
-        SpawnChesspiece(10, GetTileCenter(6, 7));
+        SpawnChesspiece(10, 1, 7);
+        SpawnChesspiece(10, 6, 7);
         //Pawns
         for (int i = 0; i < 8; i++)
         {
-            SpawnChesspiece(11, GetTileCenter(i, 6));
+            SpawnChesspiece(11, i, 6);
         }
     }
     private Vector3 GetTileCenter(int x, int y)

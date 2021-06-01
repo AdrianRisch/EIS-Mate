@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1397259895578134862}
   - component: {fileID: 1397259895578937710}
   - component: {fileID: 1397259895579904942}
+  - component: {fileID: -9022903049347942094}
   m_Layer: 0
   m_Name: 7 Black King
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-9022903049347942094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397259895577908590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7e150d404dde843b284bcbd7aa45da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 0

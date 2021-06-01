@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4122044995373785408}
   - component: {fileID: 4122044995372458336}
   - component: {fileID: 4122044995371492256}
+  - component: {fileID: 3869847605191660409}
   m_Layer: 0
   m_Name: 11 Black Knight
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3869847605191660409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122044995373497696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b82eb144f476f4589312f232150cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 0

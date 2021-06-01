@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 573006281839959652}
   - component: {fileID: 573006281839156804}
   - component: {fileID: 573006281838058628}
+  - component: {fileID: -2064920030106985847}
   m_Layer: 0
   m_Name: 9 Black Rook
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-2064920030106985847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573006281840050756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cdfc8cde2745443b05069fbd1436d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWhite: 0
