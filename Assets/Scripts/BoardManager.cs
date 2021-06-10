@@ -60,7 +60,16 @@ public class BoardManager : MonoBehaviour
         if (Chessmans[x, y].isWhite != isWhiteTurn)
             return;
 
+        bool hasAtleastOneMove = false;
         allowedMoves = Chessmans[x, y].PossibleMove();
+
+        for(int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+                if (allowedMoves[i, j])
+                    hasAtleastOneMove = true;
+        }
+
         selectedChessman = Chessmans[x, y];
         BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
         
@@ -79,7 +88,7 @@ public class BoardManager : MonoBehaviour
                 //If it is the king
                 if(c.GetType() == typeof(King))
                 {
-                    //End the game
+                    EndGame();
                     return;
                 }
                 activeChesspiece.Remove(c.gameObject);
@@ -194,5 +203,20 @@ public class BoardManager : MonoBehaviour
             Debug.DrawLine(Vector3.forward * (selectionY + 1) + Vector3.right * selectionX,
                 Vector3.forward * selectionY + Vector3.right * (selectionX + 1));
         }
+    }
+
+    private void EndGame()
+    {
+        if (isWhiteTurn)
+            Debug.Log("White team wins");
+        else 
+            Debug.Log("Black team wins");
+
+        foreach (GameObject go in activeChesspiece)
+            Destroy(go);
+
+        isWhiteTurn = true;
+        BoardHighlights.Instance.Hidehighlights();
+        SpawnAllChesspieces(); 
     }
 }

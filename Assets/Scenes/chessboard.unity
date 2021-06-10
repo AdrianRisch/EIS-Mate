@@ -492,6 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 549415193}
   - component: {fileID: 549415192}
+  - component: {fileID: 549415194}
   m_Layer: 0
   m_Name: Chessboard-Script
   m_TagString: Untagged
@@ -524,6 +525,7 @@ MonoBehaviour:
   - {fileID: 6048071927945360920, guid: 27ef57cec876bd046ab0b4dcbcbcce60, type: 3}
   - {fileID: 4122044995373497696, guid: db3f30c19cff64b4ab703312e66a7c9b, type: 3}
   - {fileID: 1399046834778236618, guid: ba87ead1ca9374a4d8336ec364f5761f, type: 3}
+  isWhiteTurn: 1
 --- !u!4 &549415193
 Transform:
   m_ObjectHideFlags: 0
@@ -539,6 +541,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &549415194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549415191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7eb923c78e5404ca92a946646312b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightPrefab: {fileID: 1747227552098793185, guid: cf7247e0ac276d048a3b2fc1d93ca338, type: 3}
 --- !u!1 &1266140897
 GameObject:
   m_ObjectHideFlags: 0
