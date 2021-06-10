@@ -45,7 +45,6 @@ public class BoardManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Input registered." + selectionX);
             if (selectionX >= 0 && selectionY >= 0)
             {
                 if (selectedChessman == null)
