@@ -1,70 +1,24 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class King : Chessman
 {
-    public override bool[,] PossibleMove()
+    public override bool[,] PossibleMoves()
     {
         bool[,] r = new bool[8, 8];
-        Chessman c;
-        int i, j;
 
-        //Top side
-        i = CurrentX - 1;
-        j = CurrentY + 1;
-        if(CurrentY !=7)
-        {
-            for(int k = 0; k < 3; k++)
-            {
-                if(i >= 0 || i < 8)
-                {
-                    c = BoardManager.Instance.Chessmans[i, j];
-                    if (c == null)
-                        r[i, j] = true;
-                    else if (isWhite != c.isWhite)
-                        r[i, j] = true;
-                }
-                i++;
-            }
-        }
-        //Down side
-        i = CurrentX - 1;
-        j = CurrentY - 1;
-        if (CurrentY != 0)
-        {
-            for (int k = 0; k < 3; k++)
-            {
-                if (i >= 0 || i < 8)
-                {
-                    c = BoardManager.Instance.Chessmans[i, j];
-                    if (c == null)
-                        r[i, j] = true;
-                    else if (isWhite != c.isWhite)
-                        r[i, j] = true;
-                }
-                i++;
-            }
-        }
-
-        //Middle Left
-        if(CurrentX != 0)
-        {
-            c = BoardManager.Instance.Chessmans[CurrentX - 1, CurrentY];
-            if (c == null)
-                r[CurrentX - 1, CurrentY] = true;
-            else if (isWhite != c.isWhite)
-                r[CurrentX - 1, CurrentY] = true;
-        }
-        //Middle Right
-        if (CurrentX != 0)
-        {
-            c = BoardManager.Instance.Chessmans[CurrentX + 1, CurrentY];
-            if (c == null)
-                r[CurrentX + 1, CurrentY] = true;
-            else if (isWhite != c.isWhite)
-                r[CurrentX + 1, CurrentY] = true;
-        }
+        Move(CurrentX + 1, CurrentY, ref r); // up
+        Move(CurrentX - 1, CurrentY, ref r); // down
+        Move(CurrentX, CurrentY - 1, ref r); // left
+        Move(CurrentX, CurrentY + 1, ref r); // right
+        Move(CurrentX + 1, CurrentY - 1, ref r); // up left
+        Move(CurrentX - 1, CurrentY - 1, ref r); // down left
+        Move(CurrentX + 1, CurrentY + 1, ref r); // up right
+        Move(CurrentX - 1, CurrentY + 1, ref r); // down right
 
         return r;
     }
+
+
+
 }

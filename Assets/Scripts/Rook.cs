@@ -1,97 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Rook : Chessman
 {
-    public override bool[,] PossibleMove()
+    public override bool[,] PossibleMoves()
     {
         bool[,] r = new bool[8, 8];
 
-        Chessman c;
         int i;
 
-        //Right
+        // Right
         i = CurrentX;
-        while(true)
+        while (true)
         {
             i++;
-            if (i >= 8)
-                break;
+            if (i >= 8) break;
 
-            c = BoardManager.Instance.Chessmans[i, CurrentY];
-            if (c == null)
-                r[i, CurrentY] = true;
-            else
-            {
-                if(c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
+            if (Move(i, CurrentY, ref r)) break;
         }
-        //Left
+
+        // Left
         i = CurrentX;
         while (true)
         {
             i--;
-            if (i < 0)
-                break;
+            if (i < 0) break;
 
-            c = BoardManager.Instance.Chessmans[i, CurrentY];
-            if (c == null)
-                r[i, CurrentY] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
+            if (Move(i, CurrentY, ref r)) break;
         }
-        //Up
+
+        // Up
         i = CurrentY;
         while (true)
         {
             i++;
-            if (i >= 8)
-                break;
+            if (i >= 8) break;
 
-            c = BoardManager.Instance.Chessmans[CurrentX, i];
-            if (c == null)
-                r[CurrentX, i] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
+            if (Move(CurrentX, i, ref r)) break;
         }
-        //Down
+
+        // Down
         i = CurrentY;
         while (true)
         {
             i--;
-            if (i < 0)
-                break;
+            if (i < 0) break;
 
-            c = BoardManager.Instance.Chessmans[CurrentX, i];
-            if (c == null)
-                r[CurrentX, i] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
+            if (Move(CurrentX, i, ref r)) break;
+
         }
 
         return r;
     }
+
+
+
 }

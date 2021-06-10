@@ -1,182 +1,105 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Queen : Chessman
 {
-    public override bool[,] PossibleMove()
+
+    public override bool[,] PossibleMoves()
     {
         bool[,] r = new bool[8, 8];
 
-        Chessman c;
         int i, j;
 
-        //Right
-        i = CurrentX;
-        while (true)
-        {
-            i++;
-            if (i >= 8)
-                break;
-
-            c = BoardManager.Instance.Chessmans[i, CurrentY];
-            if (c == null)
-                r[i, CurrentY] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
-        }
-        //Left
-        i = CurrentX;
-        while (true)
-        {
-            i--;
-            if (i < 0)
-                break;
-
-            c = BoardManager.Instance.Chessmans[i, CurrentY];
-            if (c == null)
-                r[i, CurrentY] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
-        }
-        //Up
-        i = CurrentY;
-        while (true)
-        {
-            i++;
-            if (i >= 8)
-                break;
-
-            c = BoardManager.Instance.Chessmans[CurrentX, i];
-            if (c == null)
-                r[CurrentX, i] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
-        }
-        //Down
-        i = CurrentY;
-        while (true)
-        {
-            i--;
-            if (i < 0)
-                break;
-
-            c = BoardManager.Instance.Chessmans[CurrentX, i];
-            if (c == null)
-                r[CurrentX, i] = true;
-            else
-            {
-                if (c.isWhite != isWhite)
-                {
-                    r[i, CurrentY] = true;
-                }
-                break;
-            }
-        }
-
-        //Top Left
+        // Top left
         i = CurrentX;
         j = CurrentY;
         while (true)
         {
             i--;
             j++;
-            if (i < 0 || j >= 8)
-                break;
+            if (i < 0 || j >= 8) break;
 
-            c = BoardManager.Instance.Chessmans[i, j];
-            if (c == null)
-                r[i, j] = true;
-            else
-            {
-                if (isWhite != c.isWhite)
-                    r[i, j] = true;
-
-                break;
-            }
+            if (Move(i, j, ref r)) break;
         }
-        //Top Right
+
+        // Top right
         i = CurrentX;
         j = CurrentY;
         while (true)
         {
             i++;
             j++;
-            if (i >= 0 || j >= 8)
-                break;
+            if (i >= 8 || j >= 8) break;
 
-            c = BoardManager.Instance.Chessmans[i, j];
-            if (c == null)
-                r[i, j] = true;
-            else
-            {
-                if (isWhite != c.isWhite)
-                    r[i, j] = true;
-
-                break;
-            }
+            if (Move(i, j, ref r)) break;
         }
-        //Down Left
+
+        // Down left
         i = CurrentX;
         j = CurrentY;
         while (true)
         {
             i--;
             j--;
-            if (i < 0 || j < 8)
-                break;
+            if (i < 0 || j < 0) break;
 
-            c = BoardManager.Instance.Chessmans[i, j];
-            if (c == null)
-                r[i, j] = true;
-            else
-            {
-                if (isWhite != c.isWhite)
-                    r[i, j] = true;
-
-                break;
-            }
+            if (Move(i, j, ref r)) break;
         }
-        //Down Right
+
+        // Down right
         i = CurrentX;
         j = CurrentY;
         while (true)
         {
             i++;
             j--;
-            if (i >= 8 || j < 0)
-                break;
+            if (i >= 8 || j < 0) break;
 
-            c = BoardManager.Instance.Chessmans[i, j];
-            if (c == null)
-                r[i, j] = true;
-            else
-            {
-                if (isWhite != c.isWhite)
-                    r[i, j] = true;
+            if (Move(i, j, ref r)) break;
+        }
 
-                break;
-            }
+        // Right
+        i = CurrentX;
+        while (true)
+        {
+            i++;
+            if (i >= 8) break;
+
+            if (Move(i, CurrentY, ref r)) break;
+        }
+
+        // Left
+        i = CurrentX;
+        while (true)
+        {
+            i--;
+            if (i < 0) break;
+
+            if (Move(i, CurrentY, ref r)) break;
+        }
+
+        // Up
+        i = CurrentY;
+        while (true)
+        {
+            i++;
+            if (i >= 8) break;
+
+            if (Move(CurrentX, i, ref r)) break;
+        }
+
+        // Down
+        i = CurrentY;
+        while (true)
+        {
+            i--;
+            if (i < 0) break;
+
+            if (Move(CurrentX, i, ref r)) break;
+
         }
 
         return r;
     }
+
 }

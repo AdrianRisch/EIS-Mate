@@ -1,43 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Knight : Chessman
 {
-    public override bool[,] PossibleMove()
+    public override bool[,] PossibleMoves()
     {
         bool[,] r = new bool[8, 8];
 
-        //UpLeft
-        KnightMove(CurrentX - 1, CurrentY + 2, ref r);
-        //UpRight
-        KnightMove(CurrentX + 1, CurrentY + 2, ref r);
-        //RightUp
-        KnightMove(CurrentX + 2, CurrentY + 1, ref r);
-        //RightDown
-        KnightMove(CurrentX + 2, CurrentY - 1, ref r);
-        //DownLeft
-        KnightMove(CurrentX - 1, CurrentY - 2, ref r);
-        //DownRight
-        KnightMove(CurrentX + 1, CurrentY - 2, ref r);
-        //LeftUp
-        KnightMove(CurrentX - 2, CurrentY + 1, ref r);
-        //LeftDown
-        KnightMove(CurrentX - 2, CurrentY - 1, ref r);
+        // Up left
+        Move(CurrentX - 1, CurrentY + 2, ref r);
+
+        // Up right
+        Move(CurrentX + 1, CurrentY + 2, ref r);
+
+        // Down left
+        Move(CurrentX - 1, CurrentY - 2, ref r);
+
+        // Down right
+        Move(CurrentX + 1, CurrentY - 2, ref r);
+
+
+        // Left Down
+        Move(CurrentX - 2, CurrentY - 1, ref r);
+
+        // Right Down
+        Move(CurrentX + 2, CurrentY - 1, ref r);
+
+        // Left Up
+        Move(CurrentX - 2, CurrentY + 1, ref r);
+
+        // Right Up
+        Move(CurrentX + 2, CurrentY + 1, ref r);
 
         return r;
     }
 
-    public void KnightMove(int x, int y, ref bool[,] r)
-    {
-        Chessman c;
-        if(x >= 0 && x < 8 && y >= 0 && y < 8)
-        {
-            c = BoardManager.Instance.Chessmans[x, y];
-            if (c == null)
-                r[x, y] = true;
-            else if (isWhite != c.isWhite)
-                r[x, y] = true;
-        }
-    }
 }
