@@ -172,8 +172,8 @@ public class BoardManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50.0f, LayerMask.GetMask("ChessPlane")))
         {
-            selectionX = (int)hit.point.x;
-            selectionY = (int)hit.point.z;
+            selectionX = (int)(hit.point.x * 10);
+            selectionY = (int)(hit.point.z * 10);
         }
         else
         {
