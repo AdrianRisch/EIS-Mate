@@ -182,7 +182,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    private void SpawnChessman(int index, int x, int y, bool isWhite)
+    private void  Chessman(int index, int x, int y, bool isWhite)
     {
         Vector3 position = GetTileCenter(x, y);
         GameObject go;
