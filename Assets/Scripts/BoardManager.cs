@@ -8,8 +8,8 @@ public class BoardManager : MonoBehaviour
     public static BoardManager Instance { get; set; }
     private bool[,] allowedMoves { get; set; }
 
-    private const float TILE_SIZE = 1.0f;
-    private const float TILE_OFFSET = 0.5f;
+    private const float TILE_SIZE = 0.1f;
+    private const float TILE_OFFSET = 0.05f;
 
     private int selectionX = -1;
     private int selectionY = -1;
@@ -31,7 +31,7 @@ public class BoardManager : MonoBehaviour
     public int[] EnPassantMove { set; get; }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         Instance = this;
         SpawnAllChessmans();
@@ -43,7 +43,7 @@ public class BoardManager : MonoBehaviour
     {
         UpdateSelection();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //change to touch
         {
             if (selectionX >= 0 && selectionY >= 0)
             {
