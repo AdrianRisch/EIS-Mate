@@ -31,7 +31,7 @@ public class BoardManager : MonoBehaviour
     public int[] EnPassantMove { set; get; }
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         Instance = this;
         SpawnAllChessmans();
@@ -43,7 +43,7 @@ public class BoardManager : MonoBehaviour
     {
         UpdateSelection();
 
-        if (Input.GetMouseButtonDown(0)) //change to touch
+        if (Input.GetMouseButtonDown(0))
         {
             if (selectionX >= 0 && selectionY >= 0)
             {
@@ -131,7 +131,7 @@ public class BoardManager : MonoBehaviour
             EnPassantMove[1] = -1;
             if (selectedChessman.GetType() == typeof(Pawn))
             {
-                if(y == 7) // White Promotion
+                if (y == 7) // White Promotion
                 {
                     activeChessman.Remove(selectedChessman.gameObject);
                     Destroy(selectedChessman.gameObject);
@@ -172,8 +172,8 @@ public class BoardManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50.0f, LayerMask.GetMask("ChessPlane")))
         {
-            selectionX = (int)(hit.point.x * 10);
-            selectionY = (int)(hit.point.z * 10);
+            selectionX = (int)hit.point.x * 10;
+            selectionY = (int)hit.point.z * 10;
         }
         else
         {
@@ -182,7 +182,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    private void  Chessman(int index, int x, int y, bool isWhite)
+    private void SpawnChessman(int index, int x, int y, bool isWhite)
     {
         Vector3 position = GetTileCenter(x, y);
         GameObject go;
@@ -287,5 +287,3 @@ public class BoardManager : MonoBehaviour
         SpawnAllChessmans();
     }
 }
-
-
