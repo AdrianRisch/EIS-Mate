@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TextSpeech;
+using System.Security.Cryptography;
 
 public class BoardManager : MonoBehaviour
 {
@@ -36,6 +38,7 @@ public class BoardManager : MonoBehaviour
         Instance = this;
         SpawnAllChessmans();
         EnPassantMove = new int[2] { -1, -1 };
+        SpeechToText.instance.onResultCallback = onResultCallback;
     }
 
     // Update is called once per frame
@@ -62,6 +65,13 @@ public class BoardManager : MonoBehaviour
 
         if (Input.GetKey("escape"))
             Application.Quit();
+    }
+
+    void onResultCallback(string _data)
+    {
+        if (_data == "A1") {
+            SelectChessman(0, 1);
+        }
     }
 
     private void SelectChessman(int x, int y)

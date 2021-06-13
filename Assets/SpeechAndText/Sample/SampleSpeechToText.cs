@@ -46,9 +46,6 @@ public class SampleSpeechToText : MonoBehaviour
     }
     void OnResultSpeech(string _data)
     {
-        Debug.Log("Es sollte" + _data + "da stehen");
-        outputText.text = "Du hast gesagt 4" + _data;
-        outputter.text = "Du hast gesagt2" + _data;
         result = _data;
     }
     public void OnClickSpeak()
