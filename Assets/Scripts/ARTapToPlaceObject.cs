@@ -21,6 +21,9 @@ public class ARTapToPlaceObject : MonoBehaviour
     private float currentDistance;
     private Vector3 initialScale;
 
+    public Vector3 boardPos;
+    public Quaternion boardRot;
+
     private void Awake()
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
@@ -47,11 +50,15 @@ public class ARTapToPlaceObject : MonoBehaviour
             if(spawnedObject == null)
             {
                 spawnedObject = Instantiate(gameObjectToInstantiate, hitPose.position, hitPose.rotation);
+                boardPos = hitPose.position;
+                boardRot = hitPose.rotation;
             }
             else
             {
                 spawnedObject.transform.position = hitPose.position;
                 spawnedObject.transform.rotation = hitPose.rotation;
+                boardPos = hitPose.position;
+                boardRot = hitPose.rotation;
             }
             if(Input.touchCount == 2)
             {

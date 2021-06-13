@@ -197,6 +197,11 @@ public class BoardManager : MonoBehaviour
         }
 
         go.transform.SetParent(transform);
+        GameObject arSession = GameObject.Find("AR Session Origin");
+        ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
+        Vector3 origin = arObj.boardPos;
+        Quaternion rotation = arObj.boardRot;
+        go.transform.parent.SetPositionAndRotation(origin, rotation);
         Chessmans[x, y] = go.GetComponent<Chessman>();
         Chessmans[x, y].SetPosition(x, y);
         activeChessman.Add(go);
@@ -204,7 +209,11 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 GetTileCenter(int x, int y)
     {
-        Vector3 origin = Vector3.zero;
+        //Vector3 origin = Vector3.zero;
+        GameObject arSession = GameObject.Find("AR Session Origin");
+        ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
+        Vector3 origin = arObj.boardPos;
+        
         origin.x += (TILE_SIZE * x) + TILE_OFFSET;
         origin.z += (TILE_SIZE * y) + TILE_OFFSET;
 
