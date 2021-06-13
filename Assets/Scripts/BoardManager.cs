@@ -187,6 +187,12 @@ public class BoardManager : MonoBehaviour
         Vector3 position = GetTileCenter(x, y);
         GameObject go;
 
+        GameObject arSession = GameObject.Find("AR Session Origin");
+        ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
+        Vector3 origin = arObj.boardPos;
+        Quaternion rotation = arObj.boardRot;
+        this.transform.SetPositionAndRotation(origin, rotation);
+
         if (isWhite)
         {
             go = Instantiate(chessmanPrefabs[index], position, whiteOrientation) as GameObject;
@@ -197,11 +203,6 @@ public class BoardManager : MonoBehaviour
         }
 
         go.transform.SetParent(transform);
-        GameObject arSession = GameObject.Find("AR Session Origin");
-        ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
-        Vector3 origin = arObj.boardPos;
-        Quaternion rotation = arObj.boardRot;
-        go.transform.parent.SetPositionAndRotation(origin, rotation);
         Chessmans[x, y] = go.GetComponent<Chessman>();
         Chessmans[x, y].SetPosition(x, y);
         activeChessman.Add(go);
