@@ -20,6 +20,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     private float initialDistance;
     private float currentDistance;
     private Vector3 initialScale;
+    public float currentFactor;
 
     public Vector3 boardPos;
     public Quaternion boardRot;
@@ -86,6 +87,7 @@ public class ARTapToPlaceObject : MonoBehaviour
                     }
                     var factor = currentDistance / initialDistance;
                     spawnedObject.transform.localScale = initialScale * factor;
+                    currentFactor = factor;
                 }
             }
         }

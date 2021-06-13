@@ -37,11 +37,24 @@ public class BoardHighlights : MonoBehaviour
             {
                 if (moves[i, j])
                 {
-                    float i_2 = (float)i / 10;
-                    float j_2 = (float)j / 10;
                     GameObject go = GetHighLightObject();
+
+                    GameObject arSession = GameObject.Find("AR Session Origin");
+                    ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
+                    Vector3 origin = arObj.boardPos;
+                    Quaternion rotation = arObj.boardRot;
+                    float factor = arObj.currentFactor;
+                    Vector3 currentScale = (new Vector3(0.01f, 0.01f, 0.01f) * (float) factor);
+
+                    float i_2 = (float)(i / 10);
+                    float j_2 = (float)(j / 10);
+                    Vector3 position = new Vector3(i_2 + 0.05f, 0.0001f, j_2 + 0.05f);
+
                     go.SetActive(true);
-                    go.transform.position = new Vector3(i_2 + 0.05f, 0.0001f, j_2 + 0.05f);
+
+                    go.transform.position = origin + position;
+                    go.transform.rotation = rotation;
+                    go.transform.localScale = currentScale;
                 }
             }
 
