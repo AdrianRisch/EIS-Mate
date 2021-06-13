@@ -69,8 +69,44 @@ public class BoardManager : MonoBehaviour
 
     void onResultCallback(string _data)
     {
-        if (_data == "A1") {
-            SelectChessman(0, 1);
+        int xPos = 10;
+
+        switch (_data.Substring(0, 1))
+        {
+            case "A":
+                xPos = 0;
+                break;
+
+            case "B":
+                xPos = 1;
+                break;
+            case "C":
+                xPos = 2;
+                break;
+            case "D":
+                xPos = 3;
+                break;
+            case "E":
+                xPos = 4;
+                break;
+            case "F":
+                xPos = 5;
+                break;
+            case "G":
+                xPos = 6;
+                break;
+            case "H":
+                xPos = 7;
+                break;
+            default:
+                break;
+        }
+
+        int yPos = Int32.Parse(_data.Substring(1, 1));
+
+        if (xPos >= 0 && xPos <= 7 && yPos >= 1 && yPos <= 8)
+        {
+            SelectChessman(xPos, yPos - 1);
         }
     }
 

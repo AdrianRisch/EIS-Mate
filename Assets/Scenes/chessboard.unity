@@ -198,6 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectToInstantiate: {fileID: 7740388801763842963, guid: 0842a945e79bd4943a6ca65e58f510bd, type: 3}
+  boardPos: {x: 0, y: 0, z: 0}
+  boardRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &76946636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2284,7 +2286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1559720318
 RectTransform:
   m_ObjectHideFlags: 0
