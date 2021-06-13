@@ -106,7 +106,16 @@ public class BoardManager : MonoBehaviour
 
         if (xPos >= 0 && xPos <= 7 && yPos >= 1 && yPos <= 8)
         {
-            SelectChessman(xPos, yPos - 1);
+            if (selectedChessman == null)
+            {
+                // Select the chessman
+                SelectChessman(xPos, yPos-1);
+            }
+            else
+            {
+                // Move the chessman
+                MoveChessman(xPos, yPos - 1);
+            }
         }
     }
 
