@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TextSpeech;
 using System.Security.Cryptography;
+using UnityEngine.UI;
 
 public class BoardManager : MonoBehaviour
 {
@@ -285,10 +286,10 @@ public class BoardManager : MonoBehaviour
         /////// White ///////
 
         // King
-        SpawnChessman(0, 3, 0, true);
+        SpawnChessman(0, 4, 0, true);
 
         // Queen
-        SpawnChessman(1, 4, 0, true);
+        SpawnChessman(1, 3, 0, true);
 
         // Rooks
         SpawnChessman(2, 0, 0, true);
@@ -339,10 +340,12 @@ public class BoardManager : MonoBehaviour
     private void EndGame()
     {
         if (isWhiteTurn)
-            Debug.Log("White wins");
-        else
-            Debug.Log("Black wins");
-
+        {
+            StartCoroutine(ShowVictory(4));
+        } else
+        {
+            StartCoroutine(ShowDefeat(4));
+        }
         foreach (GameObject go in activeChessman)
         {
             Destroy(go);
@@ -351,5 +354,21 @@ public class BoardManager : MonoBehaviour
         isWhiteTurn = true;
         BoardHighlights.Instance.HideHighlights();
         SpawnAllChessmans();
+    }
+
+    IEnumerator ShowVictory (float delay)
+    {
+        Image victoryImage = GameObject.FindWithTag("Victory").GetComponent<Image>();
+        victoryImage.enabled = true;
+        yield return new WaitForSeconds(delay);
+        victoryImage.enabled = false;
+    }
+
+    IEnumerator ShowDefeat(float delay)
+    {
+        Image defeatImage = GameObject.FindWithTag("Defeat").GetComponent<Image>();
+        defeatImage.enabled = true;
+        yield return new WaitForSeconds(delay);
+        defeatImage.enabled = false;
     }
 }
