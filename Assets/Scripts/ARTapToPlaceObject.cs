@@ -25,6 +25,8 @@ public class ARTapToPlaceObject : MonoBehaviour
     public Vector3 boardPos;
     public Quaternion boardRot;
 
+    private Quaternion standardRot = Quaternion.identity;
+
     private void Awake()
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
@@ -48,18 +50,19 @@ public class ARTapToPlaceObject : MonoBehaviour
         {
             var hitPose = hits[0].pose;
 
+            //möglich überall wo standardrot = hitPose.rotation
             if(spawnedObject == null)
             {
-                spawnedObject = Instantiate(gameObjectToInstantiate, hitPose.position, hitPose.rotation);
+                spawnedObject = Instantiate(gameObjectToInstantiate, hitPose.position, standardRot);
                 boardPos = hitPose.position;
-                boardRot = hitPose.rotation;
+                boardRot = standardRot;
             }
             else
             {
                 spawnedObject.transform.position = hitPose.position;
-                spawnedObject.transform.rotation = hitPose.rotation;
+                spawnedObject.transform.rotation = standardRot;
                 boardPos = hitPose.position;
-                boardRot = hitPose.rotation;
+                boardRot = standardRot;
             }
             if(Input.touchCount == 2)
             {

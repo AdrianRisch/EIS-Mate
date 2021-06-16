@@ -109,7 +109,7 @@ public class BoardManager : MonoBehaviour
             if (selectedChessman == null)
             {
                 // Select the chessman
-                SelectChessman(xPos, yPos-1);
+                SelectChessman(xPos, yPos - 1);
             }
             else
             {
@@ -265,13 +265,14 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 GetTileCenter(int x, int y)
     {
-        //Vector3 origin = Vector3.zero;
+        Vector3 origin = Vector3.zero;
         GameObject arSession = GameObject.Find("AR Session Origin");
         ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
-        Vector3 origin = arObj.boardPos;
+        Vector3 boardPos= arObj.boardPos;
         
-        origin.x += (TILE_SIZE * x) + TILE_OFFSET;
-        origin.z += (TILE_SIZE * y) + TILE_OFFSET;
+        origin.x = boardPos.x + (TILE_SIZE * x) + TILE_OFFSET;
+        origin.z = boardPos.z + (TILE_SIZE * y) + TILE_OFFSET;
+        origin.y = boardPos.y;
 
         return origin;
     }
