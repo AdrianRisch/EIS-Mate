@@ -22,6 +22,8 @@ public class BoardManager : MonoBehaviour
     private Quaternion whiteOrientation = Quaternion.Euler(0, 270, 0);
     private Quaternion blackOrientation = Quaternion.Euler(0, 90, 0);
 
+    private Vector3 initialScale = new Vector3(0.1f, 0.1f, 0.1f);
+
     public Chessman[,] Chessmans { get; set; }
     private Chessman selectedChessman;
 
@@ -269,7 +271,12 @@ public class BoardManager : MonoBehaviour
         GameObject arSession = GameObject.Find("AR Session Origin");
         ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
         Vector3 boardPos= arObj.boardPos;
+        float factor = arObj.scaleFactor;
         
+        //origin.x = boardPos.x + ((TILE_SIZE * factor) * x) + TILE_OFFSET;
+        //origin.z = boardPos.z + ((TILE_SIZE * factor) * y) + TILE_OFFSET;
+        //origin.y = boardPos.y;
+
         origin.x = boardPos.x + (TILE_SIZE * x) + TILE_OFFSET;
         origin.z = boardPos.z + (TILE_SIZE * y) + TILE_OFFSET;
         origin.y = boardPos.y;

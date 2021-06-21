@@ -198,9 +198,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectToInstantiate: {fileID: 7740388801763842963, guid: 0842a945e79bd4943a6ca65e58f510bd, type: 3}
-  currentFactor: 0
+  boardScale: {x: 0, y: 0, z: 0}
   boardPos: {x: 0, y: 0, z: 0}
   boardRot: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: 0
 --- !u!114 &76946636
 MonoBehaviour:
   m_ObjectHideFlags: 0

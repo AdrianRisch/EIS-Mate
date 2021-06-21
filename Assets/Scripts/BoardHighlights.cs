@@ -43,18 +43,16 @@ public class BoardHighlights : MonoBehaviour
                     ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
                     Vector3 origin = arObj.boardPos;
                     Quaternion rotation = arObj.boardRot;
-                    float factor = arObj.currentFactor;
-                    Vector3 currentScale = (new Vector3(0.01f, 0.01f, 0.01f) * (float) factor);
-
-                    float i_2 = (float)(i / 10);
-                    float j_2 = (float)(j / 10);
-                    Vector3 position = new Vector3(i_2 + 0.05f, 0.0001f, j_2 + 0.05f);
+                    Vector3 scale = arObj.boardScale;
 
                     go.SetActive(true);
 
+                    Vector3 position = new Vector3(i + 0.5f, 0.0001f, j + 0.5f);
+                    position /= 10;
+
                     go.transform.position = origin + position;
-                    go.transform.rotation = rotation;
-                    go.transform.localScale = currentScale;
+                    //go.transform.rotation = rotation;
+                    //go.transform.localScale = scale;
                 }
             }
 
