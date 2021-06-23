@@ -51,9 +51,10 @@ public class ARTapToPlaceObject : MonoBehaviour
         if(_arRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = hits[0].pose;
+            float factor;
 
             //möglich überall wo standardrot = hitPose.rotation
-            if(spawnedObject == null)
+            if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(gameObjectToInstantiate, hitPose.position, standardRot);
                 boardPos = hitPose.position;
@@ -75,7 +76,11 @@ public class ARTapToPlaceObject : MonoBehaviour
                 if(touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
                    touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
                 {
-                    //Todo: Hier Faktor setzen nach jedem beendetem resize?
+                    //Faktor zwischenspeichern nach jedem resize
+                    Debug.Log("Resize Faktor: " + scaleFactor);
+
+                    spawnedObject.GetComponent<BoardManager>().setFactor(scaleFactor);
+
                     return;
                 }
                 if(touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
@@ -91,12 +96,13 @@ public class ARTapToPlaceObject : MonoBehaviour
                     {
                         return; //do nothing
                     }
-                    float factor = currentDistance / initialDistance;
+                    factor = currentDistance / initialDistance;
                     spawnedObject.transform.localScale = initialScale * factor;
+
+                    Debug.Log("Resizing: " + factor);
 
                     //Hier Faktor zwischenspeichern zum Nutzen in BoardManager
                     scaleFactor = factor;
-                    Debug.Log("Resize Faktor: " + factor);
                 }
             }
         }

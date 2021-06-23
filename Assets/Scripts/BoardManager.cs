@@ -278,7 +278,7 @@ public class BoardManager : MonoBehaviour
         //Wenn einmal resized wird beim zweiten mal wieder bei 1 angefangen
         //Deshalb wenn zB einmal um 0.5 resized und dann nochmal um 0.5 -> insgesamt 0.5*0.5 
         //Für diese Rechnung zwischenspeichern wies beim letzten move war und multiplizieren mit aktuellem Faktor
-        factor *= arObj.scaleFactor;
+        //factor = arObj.scaleFactor;
 
         Debug.Log("Faktor: " + factor);
 
@@ -293,6 +293,11 @@ public class BoardManager : MonoBehaviour
         origin.y = boardPos.y;
 
         return origin;
+    }
+
+    public void setFactor(float factor)
+    {
+        this.factor *= factor;
     }
 
     private void SpawnAllChessmans()
