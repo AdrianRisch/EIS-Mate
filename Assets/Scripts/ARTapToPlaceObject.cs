@@ -24,13 +24,14 @@ public class ARTapToPlaceObject : MonoBehaviour
     public Vector3 boardScale;
     public Vector3 boardPos;
     public Quaternion boardRot;
-    public float scaleFactor = 1.0f;
+    public float scaleFactor;
 
     private Quaternion standardRot = Quaternion.identity;
 
     private void Awake()
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
+        scaleFactor = 1.0f;
     }
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
@@ -74,6 +75,7 @@ public class ARTapToPlaceObject : MonoBehaviour
                 if(touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
                    touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
                 {
+                    //Todo: Hier Faktor setzen nach jedem beendetem resize?
                     return;
                 }
                 if(touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
@@ -91,8 +93,10 @@ public class ARTapToPlaceObject : MonoBehaviour
                     }
                     float factor = currentDistance / initialDistance;
                     spawnedObject.transform.localScale = initialScale * factor;
-                    boardScale = initialScale * factor;
+
+                    //Hier Faktor zwischenspeichern zum Nutzen in BoardManager
                     scaleFactor = factor;
+                    Debug.Log("Resize Faktor: " + factor);
                 }
             }
         }

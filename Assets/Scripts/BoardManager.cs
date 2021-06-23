@@ -13,6 +13,7 @@ public class BoardManager : MonoBehaviour
 
     private const float TILE_SIZE = 0.1f;
     private const float TILE_OFFSET = 0.05f;
+    private float factor = 1.0f;
 
     private int selectionX = -1;
     private int selectionY = -1;
@@ -268,18 +269,27 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 GetTileCenter(int x, int y)
     {
+        //Scale Faktor von ARTapToPlaceObject übernehmen
         Vector3 origin = Vector3.zero;
         GameObject arSession = GameObject.Find("AR Session Origin");
         ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
         Vector3 boardPos= arObj.boardPos;
-        float factor = arObj.scaleFactor;
-        
-        //origin.x = boardPos.x + ((TILE_SIZE * factor) * x) + TILE_OFFSET;
-        //origin.z = boardPos.z + ((TILE_SIZE * factor) * y) + TILE_OFFSET;
-        //origin.y = boardPos.y;
 
-        origin.x = boardPos.x + (TILE_SIZE * x) + TILE_OFFSET;
-        origin.z = boardPos.z + (TILE_SIZE * y) + TILE_OFFSET;
+        //Wenn einmal resized wird beim zweiten mal wieder bei 1 angefangen
+        //Deshalb wenn zB einmal um 0.5 resized und dann nochmal um 0.5 -> insgesamt 0.5*0.5 
+        //Für diese Rechnung zwischenspeichern wies beim letzten move war und multiplizieren mit aktuellem Faktor
+        factor *= arObj.scaleFactor;
+
+        Debug.Log("Faktor: " + factor);
+
+        //Tile size und offset skalieren 
+        //zB wenn faktor 0.5 ist tile size statt 0.1 -> 0.05; faktor 2 -> 0.2
+        float scaledTileSize = TILE_SIZE * factor;
+        float scaledTileOffset = TILE_OFFSET * factor;
+
+        //Selbe Formel wie vorher nur mit skalierten Werten und Start-Punkt ist bei aktueller Position statt 0,0,0
+        origin.x = boardPos.x + (scaledTileSize * x) + scaledTileOffset;
+        origin.z = boardPos.z + (scaledTileSize * y) + scaledTileOffset;
         origin.y = boardPos.y;
 
         return origin;
