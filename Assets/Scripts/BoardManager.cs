@@ -36,45 +36,26 @@ public class BoardManager : MonoBehaviour
 
     public int[] EnPassantMove { set; get; }
 
-    // Use this for initialization
     void Awake()
     {
+        // Initialize all important parts
+        // Boardmanager instance
         Instance = this;
+        // spawn the chess pieces
         SpawnAllChessmans();
+        // en passant move
         EnPassantMove = new int[2] { -1, -1 };
+        // speech recognition
         SpeechToText.instance.onResultCallback = onResultCallback;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateSelection();
-
-        if (Input.GetMouseButtonDown(0)) //change to touch?
-        {
-            if (selectionX >= 0 && selectionY >= 0)
-            {
-                if (selectedChessman == null)
-                {
-                    // Select the chessman
-                    SelectChessman(selectionX, selectionY);
-                }
-                else
-                {
-                    // Move the chessman
-                    MoveChessman(selectionX, selectionY);
-                }
-            }
-        }
-
-        if (Input.GetKey("escape"))
-            Application.Quit();
-    }
-
+    // check for voice input
     void onResultCallback(string _data)
     {
         int xPos = 10;
 
+        // take first substring and check if its A-H 
+        // -> set to corresponding index as xPos
         switch (_data.Substring(0, 1))
         {
             case "A":
@@ -106,15 +87,19 @@ public class BoardManager : MonoBehaviour
                 break;
         }
 
+        // get 2nd substring and set as yPos
         int yPos = Int32.Parse(_data.Substring(1, 1));
 
+        // check if xPos and yPos are valid numbers
         if (xPos >= 0 && xPos <= 7 && yPos >= 1 && yPos <= 8)
         {
+            // if no chess piece is selected, select the one on that spot
             if (selectedChessman == null)
             {
                 // Select the chessman
                 SelectChessman(xPos, yPos - 1);
             }
+            // if one is already selected, move that piece to that spot
             else
             {
                 // Move the chessman
@@ -125,12 +110,15 @@ public class BoardManager : MonoBehaviour
 
     private void SelectChessman(int x, int y)
     {
+        // if there is no chess piece return
         if (Chessmans[x, y] == null) return;
 
+        // if the color of the chess piece is not the same as the person whos turn it is return
         if (Chessmans[x, y].isWhite != isWhiteTurn) return;
 
         bool hasAtLeastOneMove = false;
 
+        // check for possible moves
         allowedMoves = Chessmans[x, y].PossibleMoves();
         for (int i = 0; i < 8; i++)
         {
@@ -145,14 +133,17 @@ public class BoardManager : MonoBehaviour
             }
         }
 
+        // if no moves possible return
         if (!hasAtLeastOneMove)
             return;
 
+        // select chess piece and highlight it 
         selectedChessman = Chessmans[x, y];
         previousMat = selectedChessman.GetComponent<MeshRenderer>().material;
         selectedMat.mainTexture = previousMat.mainTexture;
         selectedChessman.GetComponent<MeshRenderer>().material = selectedMat;
 
+        // highlight possible moves
         BoardHighlights.Instance.HighLightAllowedMoves(allowedMoves);
     }
 
@@ -176,6 +167,7 @@ public class BoardManager : MonoBehaviour
                 activeChessman.Remove(c.gameObject);
                 Destroy(c.gameObject);
             }
+            // en passant move
             if (x == EnPassantMove[0] && y == EnPassantMove[1])
             {
                 if (isWhiteTurn)
@@ -188,6 +180,8 @@ public class BoardManager : MonoBehaviour
             }
             EnPassantMove[0] = -1;
             EnPassantMove[1] = -1;
+            
+            // Pawn Promotion
             if (selectedChessman.GetType() == typeof(Pawn))
             {
                 if (y == 7) // White Promotion
@@ -211,34 +205,20 @@ public class BoardManager : MonoBehaviour
                     EnPassantMove[1] = y + 1;
             }
 
+            // move selected chess piece to new spot
             Chessmans[selectedChessman.CurrentX, selectedChessman.CurrentY] = null;
             selectedChessman.transform.position = GetTileCenter(x, y);
             selectedChessman.SetPosition(x, y);
             Chessmans[x, y] = selectedChessman;
+
+            // change whos turn it is
             isWhiteTurn = !isWhiteTurn;
         }
 
+        // deselect chess piece
         selectedChessman.GetComponent<MeshRenderer>().material = previousMat;
-
         BoardHighlights.Instance.HideHighlights();
         selectedChessman = null;
-    }
-
-    private void UpdateSelection()
-    {
-        if (!Camera.main) return;
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50.0f, LayerMask.GetMask("ChessPlane")))
-        {
-            selectionX = (int)(hit.point.x * 10);
-            selectionY = (int)(hit.point.z * 10);
-        }
-        else
-        {
-            selectionX = -1;
-            selectionY = -1;
-        }
     }
 
     private void SpawnChessman(int index, int x, int y, bool isWhite)
@@ -246,12 +226,14 @@ public class BoardManager : MonoBehaviour
         Vector3 position = GetTileCenter(x, y);
         GameObject go;
 
+        // get current position, rotation and scale of the chessboard
         GameObject arSession = GameObject.Find("AR Session Origin");
         ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
         Vector3 origin = arObj.boardPos;
         Quaternion rotation = arObj.boardRot;
         this.transform.SetPositionAndRotation(origin, rotation);
 
+        // instantiate white pieces with white orientation and black pieces whit black orientation
         if (isWhite)
         {
             go = Instantiate(chessmanPrefabs[index], position, whiteOrientation) as GameObject;
@@ -261,6 +243,7 @@ public class BoardManager : MonoBehaviour
             go = Instantiate(chessmanPrefabs[index], position, blackOrientation) as GameObject;
         }
 
+        //  set chessboard as parent of pieces and set position
         go.transform.SetParent(transform);
         Chessmans[x, y] = go.GetComponent<Chessman>();
         Chessmans[x, y].SetPosition(x, y);
@@ -269,25 +252,19 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 GetTileCenter(int x, int y)
     {
-        //Scale Faktor von ARTapToPlaceObject übernehmen
+        // get current position of the chessboard
         Vector3 origin = Vector3.zero;
         GameObject arSession = GameObject.Find("AR Session Origin");
         ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
         Vector3 boardPos= arObj.boardPos;
 
-        //Wenn einmal resized wird beim zweiten mal wieder bei 1 angefangen
-        //Deshalb wenn zB einmal um 0.5 resized und dann nochmal um 0.5 -> insgesamt 0.5*0.5 
-        //Für diese Rechnung zwischenspeichern wies beim letzten move war und multiplizieren mit aktuellem Faktor
-        //factor = arObj.scaleFactor;
-
         Debug.Log("Faktor: " + factor);
 
-        //Tile size und offset skalieren 
-        //zB wenn faktor 0.5 ist tile size statt 0.1 -> 0.05; faktor 2 -> 0.2
+        // scale tile size and offset
         float scaledTileSize = TILE_SIZE * factor;
         float scaledTileOffset = TILE_OFFSET * factor;
 
-        //Selbe Formel wie vorher nur mit skalierten Werten und Start-Punkt ist bei aktueller Position statt 0,0,0
+        // set position with scaled offset and tile size
         origin.x = boardPos.x + (scaledTileSize * x) + scaledTileOffset;
         origin.z = boardPos.z + (scaledTileSize * y) + scaledTileOffset;
         origin.y = boardPos.y;
@@ -295,17 +272,19 @@ public class BoardManager : MonoBehaviour
         return origin;
     }
 
+    // to set scale factor from ARTapToPlaceObject
     public void setFactor(float factor)
     {
         this.factor *= factor;
     }
 
+    // spawn all the pieces on the correct tile
     private void SpawnAllChessmans()
     {
         activeChessman = new List<GameObject>();
         Chessmans = new Chessman[8, 8];
 
-        /////// White ///////
+        // White
 
         // King
         SpawnChessman(0, 4, 0, true);
@@ -332,7 +311,7 @@ public class BoardManager : MonoBehaviour
         }
 
 
-        /////// Black ///////
+        // Black
 
         // King
         SpawnChessman(6, 4, 7, false);
@@ -359,25 +338,32 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    // End Game Screen
     private void EndGame()
     {
+        // Victory
         if (isWhiteTurn)
         {
             StartCoroutine(ShowVictory(4));
-        } else
+        } 
+        // Defeat
+        else
         {
             StartCoroutine(ShowDefeat(4));
         }
+        // Remove all Pieces
         foreach (GameObject go in activeChessman)
         {
             Destroy(go);
         }
 
+        // Reset Game
         isWhiteTurn = true;
         BoardHighlights.Instance.HideHighlights();
         SpawnAllChessmans();
     }
 
+    // Show Victory Screen
     IEnumerator ShowVictory (float delay)
     {
         Image victoryImage = GameObject.FindWithTag("Victory").GetComponent<Image>();
@@ -386,6 +372,7 @@ public class BoardManager : MonoBehaviour
         victoryImage.enabled = false;
     }
 
+    // Show Defeat Screen
     IEnumerator ShowDefeat(float delay)
     {
         Image defeatImage = GameObject.FindWithTag("Defeat").GetComponent<Image>();

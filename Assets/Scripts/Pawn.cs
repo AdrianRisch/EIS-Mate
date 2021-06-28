@@ -14,7 +14,7 @@ public class Pawn : Chessman
 
         if (isWhite)
         {
-            ////// White team move //////
+            // White team
 
             // Diagonal left
             if (CurrentX != 0 && CurrentY != 7)
@@ -57,7 +57,7 @@ public class Pawn : Chessman
         }
         else
         {
-            ////// Black team move //////
+            // Black team
 
             // Diagonal left
             if (CurrentX != 0 && CurrentY != 0)

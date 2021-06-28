@@ -24,7 +24,8 @@ public class ARTapToPlaceObject : MonoBehaviour
     public Vector3 boardScale;
     public Vector3 boardPos;
     public Quaternion boardRot;
-    public float scaleFactor;
+    private float scaleFactor;
+    private Vector3 scale;
 
     private Quaternion standardRot = Quaternion.identity;
 
@@ -32,6 +33,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
         scaleFactor = 1.0f;
+        boardScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
@@ -53,13 +55,14 @@ public class ARTapToPlaceObject : MonoBehaviour
             var hitPose = hits[0].pose;
             float factor;
 
-            //möglich überall wo standardrot = hitPose.rotation
+            // if there is no board spawned instantiate it
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(gameObjectToInstantiate, hitPose.position, standardRot);
                 boardPos = hitPose.position;
                 boardRot = standardRot;
             }
+            // if there is a board spawned move it
             else
             {
                 spawnedObject.transform.position = hitPose.position;
@@ -67,28 +70,32 @@ public class ARTapToPlaceObject : MonoBehaviour
                 boardPos = hitPose.position;
                 boardRot = standardRot;
             }
+            // if pinch detected
             if(Input.touchCount == 2)
             {
                 var touchZero = Input.GetTouch(0);
                 var touchOne = Input.GetTouch(1);
 
-                //if any one of touchzero or touchone is cancelled or maybe ended do nothing
+                // if any one of touchzero or touchone is cancelled or maybe ended
                 if(touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
                    touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
                 {
-                    //Faktor zwischenspeichern nach jedem resize
+                    // set scale and factor after each resize and set them in boardmanager and boardhighlights
                     Debug.Log("Resize Faktor: " + scaleFactor);
 
                     spawnedObject.GetComponent<BoardManager>().setFactor(scaleFactor);
+                    spawnedObject.GetComponent<BoardHighlights>().setFactor(scaleFactor);
+                    spawnedObject.GetComponent<BoardHighlights>().setScale(scale);
 
                     return;
                 }
+                // on touch started save current distance and scale
                 if(touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
                 {
                     initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
                     initialScale = spawnedObject.transform.localScale;
                 }
-                else //if touch is moved
+                else //if touch is moved calculate new scale
                 {
                     currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
                     //if accidentally touched or pinch movement is very very small
@@ -101,8 +108,9 @@ public class ARTapToPlaceObject : MonoBehaviour
 
                     Debug.Log("Resizing: " + factor);
 
-                    //Hier Faktor zwischenspeichern zum Nutzen in BoardManager
+                    // save factor and scale for use in boardmanager and boardhighlights
                     scaleFactor = factor;
+                    scale = initialScale * factor;
                 }
             }
         }
