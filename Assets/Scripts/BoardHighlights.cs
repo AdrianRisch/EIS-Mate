@@ -27,7 +27,6 @@ public class BoardHighlights : MonoBehaviour
         if (go == null)
         {
             go = Instantiate(highlightPrefab);
-            //scale
             highlights.Add(go);
         }
 
@@ -73,6 +72,7 @@ public class BoardHighlights : MonoBehaviour
     public void setFactor(float factor)
     {
         this.factor *= factor;
+        scale *= factor;
     }
     // to set current scale when scaled
     public void setScale(Vector3 scale)

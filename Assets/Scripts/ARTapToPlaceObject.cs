@@ -85,7 +85,7 @@ public class ARTapToPlaceObject : MonoBehaviour
 
                     spawnedObject.GetComponent<BoardManager>().setFactor(scaleFactor);
                     spawnedObject.GetComponent<BoardHighlights>().setFactor(scaleFactor);
-                    spawnedObject.GetComponent<BoardHighlights>().setScale(scale);
+                    // spawnedObject.GetComponent<BoardHighlights>().setScale(scale);
 
                     return;
                 }
