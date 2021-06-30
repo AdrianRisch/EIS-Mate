@@ -46,7 +46,8 @@ Sollten diese Berechtigungen nicht beim ersten Start der App automatisch abgefra
 2. Mit dem Button Turn Movement On/Off können Sie das Schachbrett im Raum bewegen. Wenn Sie eine geeignete Platzierung gefunden haben klicken sie auf Turn Movement Off. Sollten sie unzufireden mit Ihrer jetzigen Position sein können Sie jederzeit mit dem Turn Movement-Button umziehen.
 <br><br>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/50317883/123960927-24372f80-d9b0-11eb-8b8c-102ea70aaa36.png" width="150"/>
+  <img src="https://user-images.githubusercontent.com/50317883/123965686-fbfdff80-d9b4-11eb-8a9a-4fa89d0b735b.gif" width="250" height=" 545"/>
+  <img src="https://user-images.githubusercontent.com/50317883/123960927-24372f80-d9b0-11eb-8b8c-102ea70aaa36.png" width="250" height=" 545"/>
 </p>
 
 ## Der erste Zug
@@ -72,6 +73,10 @@ Zum Interagieren mit den Figuren halten Sie den Mikrofon-Button auf dem Screen g
 ## Beenden der App
 
 Sie können die App einfach schließen, nur bedenken Sie, dass zurzeit keine Speicherfunktion implementiert ist und somit der Spielstand verloren geht!
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/50317883/123966070-56975b80-d9b5-11eb-90bb-96d69f87b423.png" width="350"/>
+</p>
 
 
 ---
