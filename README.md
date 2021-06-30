@@ -20,7 +20,7 @@ Bevor Sie berechtigt sind, APK-Dateien auf Ihrem Android-Gerät zu installieren,
 
 
 ### Direkt auf dem Smartphone 
-1. Apk-Datei [herunterladen](https://github.com/AdrianRisch/EIS-Mate/releases).
+1. Apk-Datei [herunterladen](https://github.com/AdrianRisch/EIS-Mate/releases/download/v1.0/EisMateV1.0.apk).
 2. Sicherheitshinweis des Browsers bestätigen.
 3. Sicherheitshinweis des Systems bestätigen.
 4. Installieren aus unbekannten Quellen zulassen.
@@ -28,7 +28,7 @@ Bevor Sie berechtigt sind, APK-Dateien auf Ihrem Android-Gerät zu installieren,
 6. App installieren.
 
 ### Vom Computer
-1. Apk-Datei [herunterladen](https://github.com/AdrianRisch/EIS-Mate/releases).
+1. Apk-Datei [herunterladen](https://github.com/AdrianRisch/EIS-Mate/releases/download/v1.0/EisMateV1.0.apk).
 2. Smartphone mit dem Computer per USB verbinden
 3. Apk-Datei auf das Smartphone übertragen 
 4. Auf dem Handy lokalisieren 
