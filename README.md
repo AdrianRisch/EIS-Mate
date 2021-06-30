@@ -56,3 +56,7 @@ Bedenken Sie das die zu beginnende Farbe immer weiß ist. Danach folgen abwechse
 ## Beenden der App
 
 Sie können die App einfach schließen, nur bedenken Sie, dass zurzeit keine Speicherfunktion implementiert ist und somit der Spielstand verloren geht!
+
+
+---
+# Quellen
