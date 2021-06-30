@@ -222,10 +222,7 @@ public class BoardManager : MonoBehaviour
             isWhiteTurn = !isWhiteTurn;
         }
 
-        // deselect chess piece
-        selectedChessman.GetComponent<MeshRenderer>().material = previousMat;
-        BoardHighlights.Instance.HideHighlights();
-        selectedChessman = null;
+        Deselect();
     }
 
     private void SpawnChessman(int index, int x, int y, bool isWhite)
@@ -378,6 +375,17 @@ public class BoardManager : MonoBehaviour
         // Reset Game
         isWhiteTurn = true;
         BoardHighlights.Instance.HideHighlights();
+    }
+
+    public void Deselect()
+    {
+        if(selectedChessman != null)
+        {
+            // deselect chess piece
+            selectedChessman.GetComponent<MeshRenderer>().material = previousMat;
+            BoardHighlights.Instance.HideHighlights();
+            selectedChessman = null;
+        }
     }
 
 }

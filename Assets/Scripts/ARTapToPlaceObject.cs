@@ -66,6 +66,8 @@ public class ARTapToPlaceObject : MonoBehaviour
             // if there is a board spawned move it
             else
             {
+                spawnedObject.GetComponent<BoardManager>().Deselect();
+
                 spawnedObject.transform.position = hitPose.position;
                 spawnedObject.transform.rotation = standardRot;
                 boardPos = hitPose.position;
@@ -93,6 +95,7 @@ public class ARTapToPlaceObject : MonoBehaviour
                 // on touch started save current distance and scale
                 if(touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
                 {
+                    spawnedObject.GetComponent<BoardManager>().Deselect();
                     initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
                     initialScale = spawnedObject.transform.localScale;
                 }
