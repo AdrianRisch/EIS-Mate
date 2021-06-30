@@ -15,16 +15,12 @@ public class BoardManager : MonoBehaviour
     private const float TILE_OFFSET = 0.05f;
     private float factor = 1.0f;
 
-    private int selectionX = -1;
-    private int selectionY = -1;
-
     public List<GameObject> chessmanPrefabs;
     private List<GameObject> activeChessman;
 
     private Quaternion whiteOrientation = Quaternion.Euler(0, 270, 0);
     private Quaternion blackOrientation = Quaternion.Euler(0, 90, 0);
 
-    private Vector3 initialScale = new Vector3(0.1f, 0.1f, 0.1f);
 
     public Chessman[,] Chessmans { get; set; }
     private Chessman selectedChessman;
@@ -64,10 +60,10 @@ public class BoardManager : MonoBehaviour
         // -> set to corresponding index as xPos
         switch (_data.Substring(0, 1))
         {
+            //Uppercase
             case "A":
                 xPos = 0;
                 break;
-
             case "B":
                 xPos = 1;
                 break;
@@ -87,6 +83,31 @@ public class BoardManager : MonoBehaviour
                 xPos = 6;
                 break;
             case "H":
+                xPos = 7;
+                break;
+                //Lowercase
+            case "a":
+                xPos = 0;
+                break;
+            case ("b"):
+                xPos = 1;
+                break;
+            case "c":
+                xPos = 2;
+                break;
+            case "d":
+                xPos = 3;
+                break;
+            case "e":
+                xPos = 4;
+                break;
+            case "f":
+                xPos = 5;
+                break;
+            case "g":
+                xPos = 6;
+                break;
+            case "h":
                 xPos = 7;
                 break;
             default:
