@@ -13,7 +13,7 @@ ToDo:
 
 ### Vorbereitung: Sicherheitseinstellungen anpassen
 
-Bevor Sie berechtigt sind, APK-Dateien auf Ihrem Android Gerät zu installieren, müssen Sie einige Einstellungen anpassen:
+Bevor Sie berechtigt sind, APK-Dateien auf Ihrem Android-Gerät zu installieren, müssen Sie einige Einstellungen anpassen:
 
 1. Öffnen Sie dafür die Einstellungen auf Ihrem Gerät.
 2. Jetzt suchen Sie die Option "Unbekannte Herkunft" (oder "Unbekannte Quellen") und aktivieren diese. 
@@ -42,8 +42,8 @@ Sollten diese Berechtigungen nicht beim ersten Start der App automatisch abgefra
 
 ## Platzieren des Schachbretts 
 
-1. Scannen Sie mit der Handykamera die Fläche, auf der das Schachbrett platziert werden soll. Flächen die erkannt wurden werden mit einer grauen Fläche gekennzeichnet.
-2. Mit dem Button Turn Movement On/Off können Sie das Schachbrett im Raum bewegen. Wenn Sie eine geeignete Platzierung gefunden haben klicken sie auf Turn Movement Off. Sollten sie unzufireden mit Ihrer jetzigen Position sein können Sie jederzeit mit dem Turn Movement-Button umziehen.
+1. Scannen Sie mit der Handykamera die Fläche, auf der das Schachbrett platziert werden soll. Flächen die erkannt wurden, werden mit einer grauen Fläche gekennzeichnet.
+2. Mit dem Button Turn Movement On/Off können Sie das Schachbrett im Raum bewegen. Sobald Sie eine geeignete Platzierung gefunden haben klicken sie auf Turn Movement Off. Sollten sie unzufrieden mit Ihrer jetzigen Position sein können Sie jederzeit mit dem Turn Movement-Button umziehen.
 <br><br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/50317883/123965686-fbfdff80-d9b4-11eb-8a9a-4fa89d0b735b.gif" width="250" height=" 545"/>
@@ -70,9 +70,9 @@ Zum Interagieren mit den Figuren halten Sie den Mikrofon-Button auf dem Screen g
 </p>
 
 
-## Beenden der App
-
-Sie können die App einfach schließen, nur bedenken Sie, dass zurzeit keine Speicherfunktion implementiert ist und somit der Spielstand verloren geht!
+## Spielende und schließen der App
+Sie können nach erfolgreichem Beenden ihres Spieles ein neues Starten oder die App einfach schließen.
+Bedenken Sie, dass zurzeit keine Speicherfunktion implementiert ist und somit der Spielstand verloren geht, wenn Sie das Spiel zwischendurch schließen!
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/50317883/123966070-56975b80-d9b5-11eb-90bb-96d69f87b423.png" width="350"/>
