@@ -1,7 +1,7 @@
 # EIS-Mate
 ToDo:
 - [X] eine kurze Anleitung für die Benutzung der von Ihnen erstellten Anwendungen (maximal eine A4-Seite, als HTML, PDF oder Markdown-Dokument in GitHub),
-- [ ] Bilder zur Anleitung hinzufügen
+- [X] Bilder zur Anleitung hinzufügen
 - [ ] eine mit einer Vorlage einer Konferenz erstellte PDF-Datei, die sich an die Vorgaben einer wissenschaftlichen Konferenz hält. Ein Beispiel einer solchen Veröffentlichung mit dem   Quelltext wird Ihnen in OLAT zur Verfügung gestellt.
 - [ ] RELEASE SPÄTESTENS AM 05.07.2021 erstellt
 - [ ] Quellcodes und Dokumentation der Quellen (vorzugsweise mit Hilfe von GitHub),
