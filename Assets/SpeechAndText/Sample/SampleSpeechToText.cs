@@ -61,8 +61,8 @@ public class SampleSpeechToText : MonoBehaviour
         TextToSpeech.instance.Setting(code, pitch, rate);
         SpeechToText.instance.Setting(code);
         txtLocale.text = "Locale: " + code;
-        txtPitch.text = "Pitch: " + pitch;
-        txtRate.text = "Rate: " + rate;
+        // txtPitch.text = "Pitch: " + pitch;
+        // txtRate.text = "Rate: " + rate;
     }
     public void OnClickApply()
     {

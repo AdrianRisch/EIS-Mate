@@ -157,8 +157,6 @@ MonoBehaviour:
   - {fileID: 1399046834778236618, guid: ba87ead1ca9374a4d8336ec364f5761f, type: 3}
   isWhiteTurn: 1
   selectedMat: {fileID: 2100000, guid: e44eb46cc5b9aa7479aaf76595115822, type: 2}
-  victoryImage: {fileID: 2744036460021071176, guid: a8d036b325c475d4893d042f0a1e8732, type: 3}
-  defeatImage: {fileID: 8062130872786816363, guid: b503feb9300f0094dad1cb7e36d57418, type: 3}
 --- !u!114 &7740388801763842974
 MonoBehaviour:
   m_ObjectHideFlags: 0

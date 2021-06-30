@@ -34,6 +34,8 @@ public class BoardManager : MonoBehaviour
     private Material previousMat;
     public Material selectedMat;
 
+    private GameOverScreen screen;
+
     public int[] EnPassantMove { set; get; }
 
     void Awake()
@@ -47,11 +49,15 @@ public class BoardManager : MonoBehaviour
         EnPassantMove = new int[2] { -1, -1 };
         // speech recognition
         SpeechToText.instance.onResultCallback = onResultCallback;
+
+        screen = GameObject.Find("CanvasObject/Canvas/EndGameCanvas").GetComponent<GameOverScreen>();
+        Debug.Log("Screen Object: " + screen.ToString());
     }
 
     // check for voice input
     void onResultCallback(string _data)
     {
+        Debug.Log("Input: " + _data);
         int xPos = 10;
 
         // take first substring and check if its A-H 
@@ -160,10 +166,11 @@ public class BoardManager : MonoBehaviour
                 if (c.GetType() == typeof(King))
                 {
                     // End the game
+                    Debug.Log("EndGame Start");
                     EndGame();
-                    return;
+                    // return;
                 }
-
+                Debug.Log("Remove piece");
                 activeChessman.Remove(c.gameObject);
                 Destroy(c.gameObject);
             }
@@ -341,43 +348,36 @@ public class BoardManager : MonoBehaviour
     // End Game Screen
     private void EndGame()
     {
+        Debug.Log("EndGame called");
         // Victory
         if (isWhiteTurn)
         {
-            StartCoroutine(ShowVictory(4));
+            screen.Setup("WHITE TEAM WINS");
         } 
         // Defeat
         else
         {
-            StartCoroutine(ShowDefeat(4));
+            screen.Setup("BLACK TEAM WINS");
         }
+    }
+    public void Restart()
+    {
         // Remove all Pieces
         foreach (GameObject go in activeChessman)
         {
             Destroy(go);
         }
+        // Remove Chessboard
+        GameObject chessboard = GameObject.Find("Chessboard");
+        Destroy(chessboard);
+        // Reset Spawned Object so it will spawn a new one on first tap
+        GameObject arSession = GameObject.Find("AR Session Origin");
+        ARTapToPlaceObject arObj = arSession.GetComponent<ARTapToPlaceObject>();
+        arObj.resetSpawnedObject();
 
         // Reset Game
         isWhiteTurn = true;
         BoardHighlights.Instance.HideHighlights();
-        SpawnAllChessmans();
     }
 
-    // Show Victory Screen
-    IEnumerator ShowVictory (float delay)
-    {
-        Image victoryImage = GameObject.FindWithTag("Victory").GetComponent<Image>();
-        victoryImage.enabled = true;
-        yield return new WaitForSeconds(delay);
-        victoryImage.enabled = false;
-    }
-
-    // Show Defeat Screen
-    IEnumerator ShowDefeat(float delay)
-    {
-        Image defeatImage = GameObject.FindWithTag("Defeat").GetComponent<Image>();
-        defeatImage.enabled = true;
-        yield return new WaitForSeconds(delay);
-        defeatImage.enabled = false;
-    }
 }

@@ -59,6 +59,7 @@ public class ARTapToPlaceObject : MonoBehaviour
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(gameObjectToInstantiate, hitPose.position, standardRot);
+                spawnedObject.name = "Chessboard";
                 boardPos = hitPose.position;
                 boardRot = standardRot;
             }
@@ -114,5 +115,10 @@ public class ARTapToPlaceObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void resetSpawnedObject()
+    {
+        spawnedObject = null;
     }
 }
