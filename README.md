@@ -42,7 +42,7 @@ Sollten diese Berechtigungen nicht beim ersten Start der App automatisch abgefra
 ## Platzieren des Schachbretts 
 
 1. Scannen Sie mit der Handykamera die Fläche, auf der das Schachbrett platziert werden soll. Flächen die erkannt wurden, werden mit einer grauen Fläche gekennzeichnet.
-2. Mit dem Button Turn Movement On/Off können Sie die Platzierung und die Skalierung des Schachbretts ein- und ausschalten. Sobald Sie eine geeignete Platzierung gefunden haben klicken sie auf Turn Movement Off. Sollten sie unzufrieden mit Ihrer jetzigen Position sein können Sie jederzeit mit dem Turn Movement-Button umziehen.
+2. Mit dem Button Turn Movement On/Off können Sie die Platzierung und die Skalierung des Schachbretts ein- und ausschalten. Platziert beziehungsweise bewegt werden kann das Schachbrett mit Ein-Finger-Tippen und skaliert wird es mit Zwei-Finger-Ziehen. Sobald Sie eine geeignete Platzierung gefunden haben klicken sie auf "Turn Movement Off". Sollten sie unzufrieden mit Ihrer jetzigen Position sein können Sie jederzeit mit dem "Turn Movement On"-Button die Bewegung wieder einschalten.
 <br><br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/50317883/123965686-fbfdff80-d9b4-11eb-8a9a-4fa89d0b735b.gif" width="250" height=" 545"/>
@@ -53,7 +53,7 @@ Sollten diese Berechtigungen nicht beim ersten Start der App automatisch abgefra
 
 Der Schritt "Platzieren des Schachbretts" muss durchgeführt worden sein!
 
-Zum Interagieren mit den Figuren halten Sie den Mikrofon-Button auf dem Screen gedrückt, wählen Ihre Figur aus und lassen dann den Button los. Nun sollte die gewählte Figur gelb markiert sein. Wiederholen Sie diesen Schritt und nennen Sie hierbei die Zielkoordinate. Bedenken Sie das die zu beginnende Farbe immer weiß ist. Danach folgen abwechselnd schwarz und weiß.
+Zum Interagieren mit den Figuren halten Sie den Mikrofon-Button auf dem Screen gedrückt, sprechen sie das Feld in Schachnotation an und lassen dann den Button los. Nun sollte die gewählte Figur gelb markiert sein, sowie die Felder der möglichen Schachzüge. Wiederholen Sie diesen Schritt und nennen Sie hierbei das Zielfeld. Bedenken Sie das die zu beginnende Farbe immer weiß ist. Danach folgen abwechselnd schwarz und weiß.
 <br><br>
 <p align="center">
  <img src="https://user-images.githubusercontent.com/50317883/123961244-6eb8ac00-d9b0-11eb-873e-4a71922a1077.png" width="250"/>
