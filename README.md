@@ -71,3 +71,7 @@ Bedenken Sie, dass zurzeit keine Speicherfunktion implementiert ist und somit de
 
 ---
 # Quellen
+
+https://www.youtube.com/watch?v=CzImJk7ZesI
+https://github.com/j1mmyto9/Speech-And-Text-Unity-iOS-Android
+https://assetstore.unity.com/packages/3d/props/2d-3d-chess-pack-93915
